@@ -1,7 +1,8 @@
 ﻿using System;
-class test1
+
+public class Trial1
 {
-    public static void Main()
+    public Trial1()
     {
         // 出力
         Console.WriteLine("helloworld");
@@ -32,7 +33,7 @@ class test1
         judge_str = boolean.ToString();
 
         num_str = num.ToString();
-        String[] array_str = {str, num_str, judge_str};
+        String[] array_str = { str, num_str, judge_str };
 
         Console.WriteLine(array_str[0] + array_str[1] + array_str[2]);
 
@@ -43,4 +44,4 @@ class test1
         nullArray[0] = null_str;
         nullArray[1] = null_int;
     }
-} 
+}
