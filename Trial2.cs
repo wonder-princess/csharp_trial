@@ -11,65 +11,63 @@ namespace csharp_trial
             String inputPath = Console.ReadLine();
             String fullPath = System.IO.Path.GetFullPath(inputPath);
 
-
             // StreamWriterクラス
             // ファイル書き込み
-            using(var writer = new StreamWriter(@fullPath)){
-                writer.WriteLine("Test")
+            using (var writer = new StreamWriter(@fullPath))
+            {
+                writer.WriteLine("Test");
             }
-            
+
             // ファイル上書き
-            using(var editWriter = new StreamWriter(@fullPath, append: true)){
-                editWriter.Write("\r\n" + "Test")
+            using (var editWriter = new StreamWriter(@fullPath, append: true))
+            {
+                editWriter.Write("\r\n" + "Test");
             }
 
             // ファイルを読み込み
-            using(var reader = new StreamReader(@fullPath)){
+            using (var reader = new StreamReader(@fullPath))
+            {
                 // まとめて読み込む
-                Console.WriteLine(reader.ReadToEnd)
+                Console.WriteLine(reader.ReadToEnd());
 
                 // 1行ずつ読み込む
-                while (!reader.EndOfStream){
-                    Console.WriteLine(reader.ReadLine)
+                while (!reader.EndOfStream)
+                {
+                    Console.WriteLine(reader.ReadLine());
                 }
             }
-            /*---------------
-            
-            FinleInfoクラス
-            
-            --------------- */
-            
+
+            /*---------------            
+            FinleInfoクラス            
+            ---------------*/
             var file = new FileInfo(@inputPath);
 
             // ファイルが存在するか
-            Console.WiterLine(file.Exits);
+            Console.WriteLine(file.Exists);
 
             // ファイル名を取得
-            Console.WriteLine(finle.Name);
+            Console.WriteLine(file.Name);
 
             // フォルダー名を取得
             Console.WriteLine(file.DirectoryName);
 
             // ファイルをコピー(既に同名ファイルが存在する場合上書き)
-            var copyFile = file.copyTo(@fullPath, true);
-            
+            var copyFile = file.CopyTo(@fullPath, true);
+
             // ファイルを移動・変更
             copyFile.MoveTo(fullPath);
-            
+
             // ファイルを削除
             copyFile.Delete();
 
-            /*---------------
-            
-            dilectoryInfoクラス
-            
-            --------------- */
-            // なんか、フォルダ名だけ切り取る処理
-            String currenrDilectory = subString(fullPath);
-            var dilectory = new dilectoryInfo(@currenrDilectory);
+            /*---------------            
+            DilectoryInfoクラス            
+            ---------------*/
+            String currenrDilectory = fullPath.Replace("\\" + fullPath, "");
+            var dilectory = new DirectoryInfo(@currenrDilectory);
 
             // フォルダーが存在するか
-            Console.WiterLine(dilectory.Exits);
+            Console.WriteLine(dilectory.Exists);
 
             // フォルダーの親フォルダー名を取得
             Console.WriteLine(dilectory.Parent);
@@ -78,21 +76,22 @@ namespace csharp_trial
             Console.WriteLine(dilectory.Root);
 
             // サブフォルダーの一覧を取得
-            var subDilectory = dilectory.GetDilectorys();
-            foreach (var dir in subDilectory){
-                Console.WiterLine(dir.FullName);
+            var subDilectory = dilectory.GetDirectories();
+            foreach (var dir in subDilectory)
+            {
+                Console.WriteLine(dir.FullName);
             }
-            
+
             // フォルダー作成
-            var madeDilectory = new dilectoryInfo(@currenrDilectory);
+            var madeDilectory = new DirectoryInfo(@currenrDilectory);
             madeDilectory.Create();
 
             // サブフォルダーの作成
-            madeDilectory.CreateSubdilectory("サブフォルダー");
+            madeDilectory.CreateSubdirectory("サブフォルダー");
 
             // ファイルを移動・変更
             madeDilectory.MoveTo(@currenrDilectory);
-            
+
             // ファイルを削除
             madeDilectory.Delete();
         }
